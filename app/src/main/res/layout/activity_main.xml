@@ -44,31 +44,62 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:text="Title"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/toolbarBack" />
+                    <EditText
+                        android:id="@+id/inputTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:hint="Title"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/toolbarBack"
-                        app:layout_constraintEnd_toStartOf="@+id/image"/>
+                        app:layout_constraintEnd_toStartOf="@+id/addImage"
+                        android:text="Input title"/>
 
+                    <View
+                        android:id="@+id/addImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/ic_image"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/save"/>
 
+                    <View
+                        android:id="@+id/save"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/ic_save"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
             </androidx.appcompat.widget.Toolbar>
-
-
-
-
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <FrameLayout
-            android:layout_width=""
-            android:layout_height=""/>
-
-
-
-
+            android:id="@+id/frameLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
