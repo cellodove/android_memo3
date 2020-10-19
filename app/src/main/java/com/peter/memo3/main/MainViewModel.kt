@@ -23,6 +23,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val memoLiveData: LiveData<Memo>
         get() = _memoLiveData
 
+    val memoListLiveData: LiveData<List<Memo>> by lazy {
+        repository.getAllMemoList()
+    }
+
+    fun changeCurrentMemo(memo: Memo) {
+        _memoLiveData.value = memo
+    }
+
+    fun changeCurrentMemo(position: Int){
+        val memo = memoListLiveData.value?.get(position)?:Memo()
+
+        _memoLiveData.value = memo
+    }
+
+
 
     //리스트화면에서 데이터들 가지고오겠다
     init {
@@ -39,6 +54,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _memoLiveData.value?.title = title
     }
 
+    //메모내용 바꾸기
+    fun changeContent(content:String) {
+        _memoLiveData.value?.content = content
+    }
+
+    fun changeImageUrl(imageUrl: String){
+        _memoLiveData.value?.imageUrl = imageUrl
+    }
 
 
     //아이디는 메모가 생성될때 자동으로 1씩 증가함 아이디가0이라는것은 처음 만들어진 메모라는뜻
@@ -76,6 +99,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             if (currentMemo!=null){
                 repository.updateMemo(currentMemo)
             }
+        }
+    }
+
+    fun deleteMemo(position: Int){
+        viewModelScope.launch {
+            val memo = memoListLiveData.value?.get(position)
+
+            if (memo != null){
+                repository.deleteMemo(memo)
+            }
+
         }
     }
 

@@ -1,4 +1,7 @@
 package com.peter.memo3.gallery.data
 
-class ImageData {
-}
+data class ImageData (
+    val id: Long,
+    val displayName: String,
+    val dateAdded: Long
+)

@@ -7,7 +7,6 @@ import com.peter.memo3.db.table.memo.Memo
 import com.peter.memo3.db.table.memo.MemoDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 class AppRepository private constructor(application: Application){
     private val memoDao : MemoDao
 

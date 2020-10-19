@@ -9,12 +9,12 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.ListFragment
 
 import com.peter.memo3.R
 import com.peter.memo3.databinding.ActivityMainBinding
 import com.peter.memo3.gallery.GalleryActivity
 import com.peter.memo3.main.fragment.editor.EditorFragment
+import com.peter.memo3.main.fragment.list.ListFragment
 import com.peter.memo3.main.fragment.viewer.ViewerFragment
 import com.peter.memo3.util.FragmentType
 
@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun setObserver() {
         viewModel.fragmentTypeLiveData.observe(this,{
 
@@ -108,17 +109,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-
-
-
-
-
+                save.isVisible = isSaveVisibility(it)
+                edit.isVisible = isEditVisibility(it)
+                addImage.isVisible = isAddImageVisibility(it)
 
             }
-
-
-
-
         })
     }
 
@@ -174,6 +169,25 @@ class MainActivity : AppCompatActivity() {
             FragmentType.EDITOR -> viewModel.memoLiveData.value?.title?:""
             else -> ""
         }
+
+    private fun isSaveVisibility(fragmentType: FragmentType): Boolean =
+        fragmentType == FragmentType.EDITOR
+
+    private fun isEditVisibility(fragmentType: FragmentType) : Boolean =
+        fragmentType == FragmentType.VIEWER
+
+    private fun isAddImageVisibility(fragmentType: FragmentType) : Boolean =
+        fragmentType == FragmentType.EDITOR
+
+
+    //뒤로가기 누르면 행동
+    override fun onBackPressed() {
+       when(viewModel.fragmentTypeLiveData.value){
+           FragmentType.LIST -> super.onBackPressed()
+           FragmentType.VIEWER,
+           FragmentType.EDITOR -> viewModel.changeFragmentType(FragmentType.LIST)
+       }
+    }
 
 
 
