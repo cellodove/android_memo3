@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setObserver() {
-        viewModel.fragmentTypeLiveData.observe(this,{
+        viewModel.fragmentTypeLiveData.observe(this) {
 
             val fragment = getFragmentByType(it)
             changeFragment(fragment)
@@ -101,10 +101,10 @@ class MainActivity : AppCompatActivity() {
                 inputTitle.apply {
                     isVisible = isInputTitleVisibility(it)
 
-                    if (isInputTitleVisibility(it)){
+                    if (isInputTitleVisibility(it)) {
                         setText(getEditTitle(it))
                         addTextChangedListener(this@MainActivity.textWatcher)
-                    }else{
+                    } else {
                         removeTextChangedListener(this@MainActivity.textWatcher)
                     }
                 }
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                 addImage.isVisible = isAddImageVisibility(it)
 
             }
-        })
+        }
     }
 
 
@@ -188,13 +188,4 @@ class MainActivity : AppCompatActivity() {
            FragmentType.EDITOR -> viewModel.changeFragmentType(FragmentType.LIST)
        }
     }
-
-
-
-
-
-
-
-
-
 }
